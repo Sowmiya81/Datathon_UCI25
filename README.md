@@ -1,6 +1,6 @@
 ## Inspiration
 
-The LMSYS Chatbot Arena dataset provides rich insights into how users prefer one chatbot response over another — but it's also full of subtle human biases. We noticed that users tend to favor longer, more confident-sounding responses, even when they aren't better in quality. This inspired us to ask: can we build a model that learns *true preference, not **biased preference*?
+The LMSYS Chatbot Arena dataset provides rich insights into how users prefer one chatbot response over another — but it's also full of subtle human biases. We noticed that users tend to favor longer, more confident-sounding responses, even when they aren't better in quality. This inspired us to ask: can we build a model that learns **true preference**, not **biased preference**?
 
 ---
 
