@@ -1,50 +1,52 @@
-# Datathon_UCI25
+## Inspiration
 
-🏁 Objective
-Predict which of two chatbot responses a user would prefer based on a given prompt, by analyzing response content, structure, tone, and relevance.
+The LMSYS Chatbot Arena dataset provides rich insights into how users prefer one chatbot response over another — but it's also full of subtle human biases. We noticed that users tend to favor longer, more confident-sounding responses, even when they aren't better in quality. This inspired us to ask: can we build a model that learns *true preference, not **biased preference*?
 
-📊 Workflow
-Data Exploration & Cleaning
+---
 
-Removed HTML, special characters, and foreign language using RegEx.
+## What it does
 
-Standardized text for uniformity.
+Our project predicts which of two chatbot responses a user is more likely to prefer, while actively correcting for human biases like verbosity and self-enhancement. It extracts handcrafted features to quantify these biases and trains a model that focuses on content quality, not style.
 
-Vectorization & Similarity
+---
 
-Used Bag of Words (BoW) and Doc2Vec for text vectorization.
+## How we built it
 
-Computed similarity metrics like Jaccard, Cosine, and BoW overlap.
+We began by exploring the data and identifying common biases in human judgments. Then, we engineered features to detect:
+•⁠  ⁠*Verbosity bias* (⁠ verbosity_diff ⁠, ⁠ avg_sentence_len ⁠, prompt-aware ratios)
+•⁠  ⁠*Self-enhancement bias* (⁠ self_ref_diff ⁠, ⁠ self_promo_diff ⁠, ⁠ fp_ratio_diff ⁠)
 
-Feature Engineering
+We also categorized prompts using regex to provide contextual understanding (e.g., ⁠ computation ⁠, ⁠ qa ⁠, ⁠ creation ⁠). We used these features to train a classifier and visualized the outcomes using Plotly.
 
-Extracted:
+---
 
-Word counts, sentence length
+## Challenges we ran into
 
-Verbosity and valuable content ratios
+•⁠  ⁠Distinguishing between *useful elaboration* and *unnecessary verbosity*
+•⁠  ⁠Designing features that could generalize across very different prompt types
+•⁠  ⁠Avoiding overfitting to surface-level patterns like response position or phrasing
 
-Sentiment scores
+---
 
-Self-reference and promotional tone indicators
+## Accomplishments that we're proud of
 
-Bias Handling
+•⁠  ⁠Built a feature-driven pipeline that directly combats bias in training signals
+•⁠  ⁠Successfully reduced the model’s reliance on biased cues like length and self-promotion
+•⁠  ⁠Created clean, interactive visualizations to explain and validate our approach
 
-Modeled verbosity bias and self-enhancement bias to prevent misleading patterns.
+---
 
-Designed specific features to neutralize superficial tone-based preferences.
+## What we learned
 
-Model Training
+•⁠  ⁠Even subtle biases in training labels can deeply affect downstream models
+•⁠  ⁠Carefully engineered features can teach models to *focus on substance over style*
+•⁠  ⁠Modeling fairness isn't just about data — it’s about framing, awareness, and design
 
-Trained a Random Forest classifier using the engineered features.
+---
 
-Achieved 67% accuracy on the test set.
+## What's next for Debiasing Chatbot Preferences
 
-🔍 Key Insights
-Verbosity difference is the most important predictor.
-
-Content-rich and concise responses are more likely to be preferred.
-
-Tone and sentiment have low influence.
-
-Manual category tags contribute negligibly.
+•⁠  ⁠Add LLM-generated bias scores or saliency maps to capture stylistic influence
+•⁠  ⁠Incorporate embedding-based similarity metrics (e.g., semantic alignment)
+•⁠  ⁠Train an end-to-end hybrid model combining embeddings with handcrafted debiasing features
+•⁠  ⁠Extend this approach to other evaluation datasets where human preferences are involved
